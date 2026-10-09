@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8"><title>Printable – PDF Print Studio</title>
+<meta name="color-scheme" content="only light">
+<script>try{if(localStorage.getItem("printable_theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
+<meta name="supported-color-schemes" content="light">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>
+:root{color-scheme:only light;background:#f3efd6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);--bg:#f3efd6;--card:#fffdf5;--tx:#23332d;--mut:#6b786d;--ac:#2f5d50;--gold:#c9a227;--bd:#e4dbb6;--in:#fbf7e6}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;background:#f3efd6 linear-gradient(160deg,#f8f0cf 0%,#eef0d6 48%,#d6e4d0 100%);color:var(--tx);font:15px/1.45 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:720px;margin:0 auto;padding:16px}
+h1{font-size:24px;margin:4px 0 6px;color:var(--ac);display:inline-block;border-bottom:3px solid var(--gold);padding-bottom:2px}p.s{color:var(--mut);margin:0 0 14px}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px;box-shadow:0 2px 8px rgba(47,93,80,.08)}
+#drop{border:2px dashed var(--gold);background:#fffbe8;text-align:center;cursor:pointer;padding:28px 12px}
+#drop.on{background:#f6eab8}
+.tool>label.h{display:flex;gap:10px;align-items:center;font-weight:600;cursor:pointer}
+.tool input[type=checkbox]{width:20px;height:20px;accent-color:var(--ac)}
+.opts{display:none;margin:10px 0 0 30px;gap:10px;flex-wrap:wrap}
+.tool.on .opts{display:flex}.tool.on{border-color:var(--gold);box-shadow:0 2px 10px rgba(201,162,39,.18)}
+.opts label{display:flex;flex-direction:column;font-size:12px;color:var(--mut);gap:3px}
+select,input[type=number],input[type=text],textarea{font:inherit;padding:7px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);max-width:100%}
+input[type=color]{width:56px;height:36px;border:1px solid var(--bd);border-radius:8px;background:none;padding:2px}
+button,.btn{font:inherit;background:var(--ac);color:#fff;border:0;border-radius:10px;padding:10px 16px;cursor:pointer;text-decoration:none;display:inline-block}
+button.g,.btn.g{background:transparent;color:var(--ac);border:1px solid var(--ac)}
+button:disabled{opacity:.5}
+#go{width:100%;font-size:17px;padding:14px;background:linear-gradient(135deg,#2f5d50,#40795f);box-shadow:0 3px 0 var(--gold);font-weight:600}
+textarea{width:100%;height:150px;font-size:12px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:8px}
+.res{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--bd)}
+.res:first-child{border-top:0}
+small{color:var(--mut)}#st{margin:8px 0;color:var(--mut)}
+.seg{display:flex;border:1px solid var(--ac);border-radius:10px;overflow:hidden;margin-bottom:12px}.seg button{flex:1;border-radius:0;background:var(--in);color:var(--ac);font-weight:600}.seg button.on{background:var(--ac);color:#fff}
+
+.view{display:none;opacity:0;transform:none;transition:opacity .38s ease,transform .5s cubic-bezier(.2,.8,.2,1);will-change:transform,opacity}
+.view.show{display:block}.view.pre-big{transform:scale(1.14)}.view.pre-small{transform:scale(.9)}.view.in{opacity:1;transform:none}
+@keyframes rise{from{opacity:0;transform:translateY(16px) scale(.97)}to{opacity:1;transform:none}}
+.view.in>*{animation:rise .55s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i,0)*55ms)}
+.big{display:flex;flex-direction:column;gap:6px;background:var(--card);border:1px solid var(--bd);border-radius:20px;padding:26px 20px;margin-bottom:14px;cursor:pointer;box-shadow:0 4px 14px rgba(47,93,80,.1);transition:transform .25s cubic-bezier(.2,.8,.2,1),box-shadow .25s,border-color .25s}
+.big:hover,.big:focus-visible{transform:translateY(-4px) scale(1.015);border-color:var(--gold);box-shadow:0 10px 26px rgba(201,162,39,.25);outline:0}
+.big:active{transform:scale(.98)}.big .ic{font-size:40px;animation:bob 3.2s ease-in-out infinite}.big b{font-size:19px;color:var(--ac)}.big span{color:var(--mut)}
+@keyframes bob{50%{transform:translateY(-5px)}}
+.back{margin-bottom:10px;padding:6px 14px}
+:root[data-theme=dark]{color-scheme:dark;background:#14201b;--bg:#14201b;--card:#1d2b25;--tx:#ece6cf;--mut:#a3b0a4;--ac:#4aa386;--gold:#e0b93c;--bd:#34463d;--in:#24342d}
+:root[data-theme=dark] body{background:#14201b linear-gradient(160deg,#1a2a22 0%,#14201b 50%,#0f1a15 100%)}
+:root[data-theme=dark] #drop,:root[data-theme=dark] #drop2{background:#22322b!important}
+:root[data-theme=dark] #drop.on{background:#2c3f35!important}
+.card,.big{transition:background .35s,border-color .35s,box-shadow .25s,transform .25s}
+@media (prefers-reduced-motion:reduce){.view,.big,.big .ic,.view.in>*{transition:none!important;animation:none!important}}
+</style></head><body><main>
+<h1>📄 Printable</h1><p class="s">Print-ready PDFs and smart question banks. Everything runs in your browser — nothing is uploaded.</p>
+
+<div id="home" class="view show in"><div class="big" tabindex="0" role="button" data-go="v1"><div class="ic">🖨️</div><b>Make one PDF printable</b><span>Pages per sheet, highlight, page numbers, odd/even split, plus an optional question bank.</span></div>
+<div class="big" tabindex="0" role="button" data-go="v2"><div class="ic">🧠</div><b>Question bank from many PDFs</b><span>Drop several files and get one shuffled bank of the high-yield essay questions only.</span></div>
+<div class="seg" id="thm"><button type="button" data-t="light">☀️ Light</button><button type="button" data-t="dark">🌙 Dark</button></div></div>
+<div id="v1" class="view"><button class="g back" data-go="home">← Home</button>
+<div class="card" id="drop"><b>Drop the teacher's PDF here</b><br><small id="fn">or tap to choose a file</small>
+<input id="f" type="file" accept="application/pdf" hidden></div>
+
+<div class="seg" id="seg"><button type="button" data-m="p">🖥 Presentation (3 per sheet)</button><button type="button" data-m="w">📄 Word (1 per sheet)</button></div>
+<div class="card" style="padding:10px 14px"><label class="h" style="display:flex;gap:10px;align-items:center;font-weight:700;cursor:pointer"><input type="checkbox" id="all" style="width:20px;height:20px;accent-color:var(--ac)">Select all tools</label></div>
+<div class="card tool" id="t3"><label class="h"><input type="checkbox" id="c3">Auto Question Bank (offline) + Merge</label>
+<div class="opts" style="display:block">
+<small>Reads every slide/page, ignores lecture numbers, page numbers, teacher names and repeated headers, skips repeated and figure-only slides, and writes 1-3 essay questions per topic with a model-answer key and page references. Works without internet or AI.</small>
+<div class="row"><label>Position&nbsp;<select id="mpos"><option value="after">Append after original</option><option value="before">Put before original</option></select></label></div>
+<div class="row"><button class="g" id="qbb">Or use my own question-bank PDF</button><input id="qb" type="file" accept="application/pdf" hidden><small id="qbn">auto-generate (default)</small></div>
+</div></div>
+
+<div class="card tool" id="t4"><label class="h"><input type="checkbox" id="c4">Background highlight + thin borders</label>
+<div class="opts"><label>Colour<input type="color" id="hc" value="#ffe066"></label>
+<label>Height (% of page)<input type="number" id="hh" value="100" min="1" max="100"></label>
+<label>Opacity (%)<input type="number" id="ho" value="30" min="5" max="100"></label>
+<label style="flex-direction:row;align-items:center;gap:6px;font-size:13px;color:var(--tx)"><input type="checkbox" id="hb1" checked>Thin border around each page-slide</label>
+<small style="width:100%">Each page-slide is tinted and framed inside a white A4 sheet, even when Pages per sheet is off. The question bank is always placed 1 per sheet.</small></div></div>
+
+<div class="card tool" id="t2"><label class="h"><input type="checkbox" id="c2">Add page numbers</label>
+<div class="opts"><label>Location<select id="np"><option value="bc">Bottom centre</option><option value="br" selected>Bottom right</option><option value="bl">Bottom left</option><option value="tc">Top centre</option><option value="tr">Top right</option><option value="tl">Top left</option></select></label>
+<label>Format<select id="nf"><option>{n}/{t}</option><option>{n}</option><option>Page {n}</option><option>Page {n} of {t}</option><option>{n} / {t}</option><option>- {n} -</option></select></label>
+<label>Size (pt)<input type="number" id="ns" value="9" min="6" max="36"></label>
+<label>Start at<input type="number" id="n0" value="1" min="0"></label></div></div>
+
+<div class="card tool" id="t1"><label class="h"><input type="checkbox" id="c1">Pages per sheet</label>
+<div class="opts"><label>Pages per sheet<select id="pp"><option>1</option><option>2</option><option selected>3</option><option>4</option><option>6</option><option>9</option></select></label>
+<label>Layout<small>auto-fits slides &amp; documents</small></label></div></div>
+
+<div class="card tool" id="t5"><label class="h"><input type="checkbox" id="c5">Split into Odd / Even (for double-sided printing)</label>
+<div class="opts"><label style="flex-direction:row;align-items:center;gap:6px;font-size:13px"><input type="checkbox" id="rv">Reverse the Even file (for printers that stack face-up)</label><small>Applied last, on the final printed sheets. Print the Odd file, flip the stack, then print the Even file.</small></div></div>
+
+<button id="go" disabled>Process PDF</button><div id="st"></div><div class="card" id="out" style="display:none"></div>
+<p class="s"><small>Your settings are remembered on this device. Order: merge → highlight → pages-per-sheet → page numbers (per printed sheet) → odd/even split.</small></p>
+</div>
+<div id="v2" class="view"><button class="g back" data-go="home">← Home</button>
+<div class="card" id="drop2" style="text-align:center;cursor:pointer;border:2px dashed var(--gold);background:#fffbe8;padding:26px 12px"><b>Drop several PDFs here</b><br><small>or tap to choose files (lectures, chapters, past papers…)</small><input id="f2" type="file" accept="application/pdf" multiple hidden></div>
+<div class="card" id="fl" style="display:none"></div>
+<div class="card"><label class="h" style="display:flex;gap:10px;align-items:center;font-weight:600">Total questions<input type="number" id="n2" value="30" min="5" max="200" style="width:80px"></label>
+<small>Only the high-yield points are used: definitions, comparisons, processes, cause-and-effect, repeated key terms and "important/remember" cues. Every file is represented in proportion to its content, then all questions are shuffled for true active recall.</small></div>
+<button id="go2" disabled style="width:100%;font-size:17px;padding:14px;background:linear-gradient(135deg,#2f5d50,#40795f);box-shadow:0 3px 0 var(--gold);font-weight:600">Build combined question bank</button><div id="st2" style="margin:8px 0;color:var(--mut)"></div><div class="card" id="out2" style="display:none"></div>
+</div>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+let src=null,qb=null,base='document';
+let CUR='home';const st=m=>$(CUR==='v2'?'st2':'st').textContent=m;
+// remember settings on this device
+const KEEP=['c1','c2','c3','c4','c5','mpos','hc','hh','ho','np','nf','ns','n0','pp','rv','hb1'],KEY='printprep_v2';
+function saveS(){try{const o={};KEEP.forEach(k=>{const e=$(k);o[k]=e.type==='checkbox'?e.checked:e.value});localStorage.setItem(KEY,JSON.stringify(o))}catch(e){}}
+function loadS(){try{const o=JSON.parse(localStorage.getItem(KEY)||'{}');KEEP.forEach(k=>{const e=$(k);if(k in o){if(e.type==='checkbox')e.checked=o[k];else e.value=o[k]}})}catch(e){}}
+// tool toggles
+loadS();
+for(let i=1;i<=5;i++){const c=$('c'+i),t=$('t'+i);t.classList.toggle('on',c.checked);c.addEventListener('change',()=>t.classList.toggle('on',c.checked))}
+$('t3').classList.add('on');
+KEEP.forEach(k=>$(k).addEventListener('change',saveS));
+const syncAll=()=>{const n=[1,2,3,4,5].filter(i=>$('c'+i).checked).length;$('all').checked=n===5;$('all').indeterminate=n>0&&n<5};
+$('all').addEventListener('change',()=>{const v=$('all').checked;for(let i=1;i<=5;i++){const c=$('c'+i);c.checked=v;c.dispatchEvent(new Event('change'))}$('all').checked=v;$('all').indeterminate=false});
+for(let i=1;i<=5;i++)$('c'+i).addEventListener('change',syncAll);
+syncAll();
+// file pickers
+$('drop').onclick=()=>$('f').click();
+$('drop').ondragover=e=>{e.preventDefault();$('drop').classList.add('on')};
+$('drop').ondragleave=()=>$('drop').classList.remove('on');
+$('drop').ondrop=e=>{e.preventDefault();$('drop').classList.remove('on');load(e.dataTransfer.files[0])};
+$('f').onchange=e=>load(e.target.files[0]);
+$('qbb').onclick=()=>$('qb').click();
+$('qb').onchange=async e=>{const f=e.target.files[0];if(!f)return;qb=new Uint8Array(await f.arrayBuffer());$('qbn').textContent=f.name;$('c3').checked=true;$('t3').classList.add('on')};
+async function load(f){if(!f||!/pdf$/i.test(f.type||f.name))return st('Please choose a PDF file.');
+ src=new Uint8Array(await f.arrayBuffer());base=f.name.replace(/\.pdf$/i,'');$('fn').textContent=f.name+' ✓';$('go').disabled=false;st('');detectMode()}
+
+const {PDFDocument,StandardFonts,rgb}=PDFLib;
+function hlPages(pgs){const col=hex($('hc').value),pc=+$('hh').value/100,op=+$('ho').value/100;pgs.forEach(p=>{const{width,height}=p.getSize();p.drawRectangle({x:0,y:0,width,height:height*pc,color:col,opacity:op,blendMode:PDFLib.BlendMode.Multiply})})}
+/* ===== Offline question-bank module ===== */
+try{pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js'}catch(e){}
+const JUNK=[/^\s*(lecture|lec|chapter|week|session|unit|slide|page|p\.?)\s*[\d#.:)-]*\s*$/i,/^\s*(slide|page|p\.?)\s*\d+\s*(of|\/)\s*\d+\s*$/i,/^\s*\d+\s*(\/|of)\s*\d+\s*$/i,/^[\d\W_]{1,8}$/,/@|https?:\/\/|www\./i,/^\s*(copyright|©|all rights)/i];
+const TEACH=/^\s*(dr|prof|professor|eng|mr|mrs|ms|instructor|lecturer|doctor|presented by|prepared by|taught by|teacher)\b[.\s:]/i;
+const STOP=new Set('the and for with that this these those from have has had are was were been into than then also can may will not but its their there which what when where who how your our you they them such more most some any each other only very'.split(' '));
+const san=t=>t.replace(/[\u2013\u2014]/g,'-').replace(/[\u2018\u2019]/g,"'").replace(/[\u201C\u201D]/g,'"').replace(/[\u2022\u25CF\u25AA\u2023]/g,'-').replace(/\u2026/g,'...').replace(/[\u00A0\u2009\u202F]/g,' ').replace(/[^\x20-\x7E\xA0-\xFF]/g,'?');
+async function extractText(bytes){
+ const pdf=await pdfjsLib.getDocument({data:bytes.slice()}).promise,pages=[];
+ for(let n=1;n<=pdf.numPages;n++){st('Reading text… page '+n+'/'+pdf.numPages);
+  const tc=await(await pdf.getPage(n)).getTextContent(),rows=[];
+  tc.items.forEach(it=>{if(!it.str.trim())return;let r=rows.find(r=>Math.abs(r.y-it.transform[5])<3);if(!r)rows.push(r={y:it.transform[5],it:[]});r.it.push({x:it.transform[4],s:it.str})});
+  rows.sort((a,b)=>b.y-a.y);
+  pages.push(rows.map(r=>r.it.sort((a,b)=>a.x-b.x).map(i=>i.s).join(' ').replace(/\s+/g,' ').trim()).filter(Boolean))}
+ return pages}
+const wc=l=>l.split(' ').length;
+const normT=t=>t.toLowerCase().replace(/\(?\s*(cont\.?|continued|cont'd)\s*\)?/g,'').replace(/[-:]?\s*(part\s*)?\d+\s*$/,'').replace(/[^a-z0-9]+/g,' ').trim();
+const key=x=>x.toLowerCase().replace(/[^a-z0-9]/g,'');
+function analyse(pages){
+ const N=pages.length,norm=l=>l.toLowerCase().replace(/\d+/g,'#'),cnt={};let ignored=0;
+ pages.forEach(p=>new Set(p.map(norm)).forEach(k=>cnt[k]=(cnt[k]||0)+1));
+ const clean=pages.map(p=>p.filter(l=>{const bad=JUNK.some(r=>r.test(l))||(TEACH.test(l)&&wc(l)<=6)||(N>=4&&cnt[norm(l)]>=Math.max(3,N*.4));if(bad)ignored++;return!bad}));
+ const seen=new Set(),pg=[];let dup=0;
+ clean.forEach((ls,pi)=>{
+  let title='';if(ls.length&&wc(ls[0])<=8&&!/[.!?]$/.test(ls[0]))title=ls.shift();
+  const m=[];ls.forEach(l=>{const q=m[m.length-1];if(q&&!/[.:;?!]$/.test(q)&&wc(q)>=5&&/^[a-z(]/.test(l))m[m.length-1]=q+' '+l;else m.push(l)});
+  const sents=[],lists=[];let frag=[],head=title;
+  const take=x=>{const k=key(x);if(!k||seen.has(k)){dup++;return false}seen.add(k);return true};
+  const flush=()=>{frag=frag.filter(take);if(frag.length)lists.push({head,items:frag});frag=[];head=title};
+  m.forEach(l=>{
+   if(/:$/.test(l)){flush();head=l.replace(/:$/,'');return}
+   if(wc(l)>=6||(/[.!?]$/.test(l)&&wc(l)>=4)){flush();l.split(/(?<=[.!?])\s+(?=[A-Z0-9])/).forEach(x=>{if(wc(x)>=3){if(take(x))sents.push(x)}else frag.push(x)})}
+   else frag.push(l)});
+  flush();
+  const words=sents.reduce((n,x)=>n+wc(x),0)+lists.reduce((n,l)=>n+l.items.reduce((a,x)=>a+wc(x),0),0);
+  pg.push({p:pi+1,title,sents,lists,words})});
+ const groups=[];let small=0;
+ pg.forEach(x=>{const tn=normT(x.title),g=groups[groups.length-1];if(x.words<8)small++;
+  if(g&&((tn&&tn===g.tn)||x.words<8)){g.pages.push(x.p);g.sents.push(...x.sents);g.lists.push(...x.lists);g.words+=x.words}
+  else groups.push({tn,title:x.title,pages:[x.p],sents:x.sents.slice(),lists:x.lists.slice(),words:x.words})});
+ const kept=groups.filter(g=>g.words>=8);
+ return{groups:kept,ignored,dup,small,pages:N,statements:kept.reduce((n,g)=>n+g.sents.length+g.lists.reduce((a,l)=>a+l.items.length,0),0)}}
+const RX={proc:/\b(step|steps|process|stage|stages|phase|phases|procedure|algorithm|finally|next)\b/i,cmp:/\b(advantages?|disadvantages?|benefits?|drawbacks?|versus|vs\.?|differs?|difference|compared|whereas|unlike|pros|cons)\b/i,cause:/\b(because|therefore|thus|leads? to|results? in|due to|causes?|so that|consequently|as a result)\b/i,def:/^(?!(?:it|this|that|these|those|there|they)\b)(.{2,60}?)\s+(?:is|are|refers to|means|is defined as|stands for)\s/i};
+function makeQs(groups){
+ const qs=[],lim=t=>t.length>230?t.slice(0,227)+'...':t;
+ groups.forEach((g,gi)=>{
+  const ref=g.pages.length>1?'Pages '+g.pages[0]+'-'+g.pages[g.pages.length-1]:'Page '+g.pages[0];
+  const k=g.words<45?1:g.words<110?2:3;
+  const topic=g.title||(g.lists[0]&&g.lists[0].head)||'the topic presented in these slides';
+  const B={def:[],cmp:[],proc:[],cause:[],gen:[]},lists=g.lists.filter(l=>l.items.length>=3);let dsub='';
+  g.sents.forEach(x=>{let m;if(!B.def.length&&(m=x.match(RX.def))&&wc(m[1])<=6&&!/[,;]/.test(m[1])){B.def.push(x);dsub=m[1].trim().replace(/^(An?|The)\s/,'')}
+   else if(RX.cmp.test(x))B.cmp.push(x);else if(RX.proc.test(x))B.proc.push(x);else if(RX.cause.test(x))B.cause.push(x);else B.gen.push(x)});
+  const spec=[];
+  if(B.def.length)spec.push({t:'Define '+dsub+' and explain its main features, purpose and importance, as presented in the lecture.',a:B.def});
+  if(B.cmp.length)spec.push({t:'Compare and contrast the main points presented about '+topic+' (advantages, disadvantages or differences), and justify which matter most.',a:B.cmp});
+  if(B.proc.length)spec.push({t:'Describe, in order, the steps or stages involved in '+topic+', explaining the purpose of each.',a:B.proc});
+  if(B.cause.length)spec.push({t:'Explain the causes and effects involved in '+topic+' and why they occur.',a:B.cause});
+  if(lists.length)spec.push({t:'Identify and explain each of the following aspects of '+topic+': '+lists[0].head+'.',a:lists[0].items});
+  const pick=spec.slice(0,k-1),used=new Set();pick.forEach(q=>q.a.forEach(x=>used.add(x)));
+  const all=[...g.sents,...g.lists.flatMap(l=>l.items)],rest=all.filter(x=>!used.has(x));
+  qs.push({ref,g:gi,q:'Explain '+topic+' in detail, covering all of its main ideas and how they relate to one another.',a:(rest.length?rest:all).map(lim)});
+  pick.forEach(q=>qs.push({ref,g:gi,spec:1,q:q.t,a:q.a.map(lim)}))});
+ return qs}
+async function qbPdf(qs,stats,name){
+ const d=await PDFDocument.create(),f=await d.embedFont(StandardFonts.Helvetica),b=await d.embedFont(StandardFonts.HelveticaBold);
+ const W=595.28,H=841.89,M=50;let pg,y;const np=()=>{pg=d.addPage([W,H]);y=H-M};np();
+ const wrap=(t,fn,sz,w)=>{const out=[];let ln='';san(t).split(' ').forEach(x=>{const tr=ln?ln+' '+x:x;if(fn.widthOfTextAtSize(tr,sz)>w&&ln){out.push(ln);ln=x}else ln=tr});if(ln)out.push(ln);return out};
+ const put=(t,o={})=>{const fn=o.b?b:f,sz=o.sz||11,ind=o.ind||0;wrap(t,fn,sz,W-M*2-ind).forEach(l=>{if(y<M+16)np();pg.drawText(l,{x:M+ind,y:y-sz,size:sz,font:fn,color:o.c||rgb(.1,.1,.1)});y-=sz*1.35});y-=o.gap??4};
+ put('Question Bank & Model Answers',{b:1,sz:20,gap:2});
+ put(name+'  |  '+qs.length+' essay questions  |  '+stats.pages+' pages analysed',{sz:9,c:rgb(.4,.4,.4),gap:12});
+ qs.forEach((q,i)=>{put((i+1)+'. '+q.q,{b:1,gap:1});put('Source: '+q.ref,{sz:8.5,c:rgb(.45,.45,.45),ind:14,gap:2});put('Model answer:',{b:1,sz:9.5,ind:14,c:rgb(.15,.45,.2),gap:1});q.a.forEach(x=>put('- '+x,{sz:9.5,ind:14,gap:2,c:rgb(.25,.25,.25)}));y-=10});
+ return d.save()}
+let QBSTAT=null;
+async function makeQB(bytes,name){
+ const pages=await extractText(bytes);const all=pages.flat().join(' ');
+ const a=analyse(pages),qs=shuffleSep(makeQs(a.groups),q=>q.g);
+ const stats={statements:a.statements,pages:a.pages,ignored:a.ignored,dup:a.dup,small:a.small,q:qs.length,arabic:(all.match(/[\u0600-\u06FF]/g)||[]).length>20,empty:all.length<20};
+ if(stats.empty)throw new Error('No readable text found (scanned PDF?). Offline text-reading of images is not added yet.');
+ QBSTAT=stats;st('Building question bank…');return qbPdf(qs,stats,name)}
+
+
+const hex=h=>{const n=parseInt(h.slice(1),16);return rgb((n>>16&255)/255,(n>>8&255)/255,(n&255)/255)};
+const LAYOUT={1:[1,1,0],2:[2,1,1],3:[3,1,1],4:[2,2,0],6:[3,2,1],9:[3,3,0]}; // cols, rows, landscape
+const A4=[595.28,841.89];
+
+async function nup(d,n){
+ const sd=await PDFDocument.load(await d.save()),out=await PDFDocument.create();
+ const emb=await out.embedPdf(sd,sd.getPageIndices());
+ let [cols,rows,land]=LAYOUT[n];const p0=sd.getPage(0).getSize();
+ if(p0.width>p0.height&&[2,3,6].includes(n)){[cols,rows]=[rows,cols];land=0}
+ const mg=$('c2').checked?30:18,border=$('c4').checked&&$('hb1').checked;
+ for(let i=0;i<emb.length;i+=n){
+  const L=n===1?emb[i].width>emb[i].height:land,[W,H]=L?[A4[1],A4[0]]:A4,cw=(W-mg*2)/cols,ch=(H-mg*2)/rows,sh=out.addPage([W,H]);
+  emb.slice(i,i+n).forEach((e,k)=>{const c=k%cols,r=Math.floor(k/cols);
+   const sc=Math.min((cw-8)/e.width,(ch-8)/e.height),w=e.width*sc,h=e.height*sc;
+   const x=mg+c*cw+(cw-w)/2,y=H-mg-(r+1)*ch+(ch-h)/2;
+   sh.drawPage(e,{x,y,width:w,height:h});
+   if(border)sh.drawRectangle({x,y,width:w,height:h,borderColor:rgb(.4,.4,.4),borderWidth:.6})})}
+ return out}
+async function run(){
+ let doc=await PDFDocument.load(src,{ignoreEncryption:true});
+ const outs=[];
+ const hl=$('c4').checked;
+ // 4. highlight each page-slide (tint inside its own page)
+ if(hl)hlPages(doc.getPages());
+ // 1. pages per sheet (highlight alone = 1 per sheet, so the A4 sheet stays white around the framed page-slide)
+ const eff=$('c1').checked?+$('pp').value:(hl?1:0);
+ if(eff)doc=await nup(doc,eff);
+ // 3. question bank: always 1 per sheet
+ if($('c3').checked){
+  let qbytes=qb;if(!qbytes){qbytes=await makeQB(src,base)}
+  let q=await PDFDocument.load(qbytes,{ignoreEncryption:true});
+  if(hl)hlPages(q.getPages());
+  if(eff)q=await nup(q,1);
+  const m=await PDFDocument.create();
+  const [a,b]=$('mpos').value==='after'?[doc,q]:[q,doc];
+  for(const d of [a,b]) (await m.copyPages(d,d.getPageIndices())).forEach(p=>m.addPage(p));
+  doc=m;
+ }
+ // 2. page numbers (on each final printed sheet)
+ if($('c2').checked){const font=await doc.embedFont(StandardFonts.Helvetica),sz=+$('ns').value,pos=$('np').value,s0=+$('n0').value;
+  const sp=doc.getPages(),tot=sp.length;
+  sp.forEach((p,i)=>{const{width,height}=p.getSize();
+   const txt=$('nf').value.replace('{n}',i+s0).replace('{t}',tot+s0-1);
+   const w=font.widthOfTextAtSize(txt,sz),mg=22;
+   const x=pos[1]==='c'?(width-w)/2:pos[1]==='r'?width-w-mg:mg;
+   const y=pos[0]==='b'?mg-6:height-mg-sz+6;
+   p.drawText(txt,{x,y,size:sz,font,color:rgb(.1,.1,.1)})})}
+ const final=await doc.save();
+ // 5. split
+ if($('c5').checked){
+  const fd=await PDFDocument.load(final),cnt=fd.getPageCount();
+  for(const [name,start] of [['odd',0],['even',1]]){
+   const idx=[];for(let i=start;i<cnt;i+=2)idx.push(i);if(name==='even'&&$('rv').checked)idx.reverse();
+   if(!idx.length)continue;
+   const d=await PDFDocument.create();(await d.copyPages(fd,idx)).forEach(p=>d.addPage(p));
+   outs.push({name:`${base}_${name}.pdf`,label:`${name==='odd'?'Odd':'Even'} pages (${idx.length} sheets)`,data:await d.save()})}
+ }else outs.push({name:`${base}_print.pdf`,label:`Print-ready PDF (${doc.getPageCount()} pages)`,data:final});
+ return outs}
+
+$('go').onclick=async()=>{
+ $('go').disabled=true;st('Processing…');$('out').style.display='none';
+ try{QBSTAT=null;const outs=await run();show(outs);st('Done ✓'+(QBSTAT?` Question bank: ${QBSTAT.q} essay questions for ${QBSTAT.statements} key points. Skipped: ${QBSTAT.ignored} useless lines, ${QBSTAT.dup} repeated lines, ${QBSTAT.small} figure-only/low-text slides.`+(QBSTAT.arabic?' ⚠ Arabic text detected: Arabic is not supported in the generated PDF yet.':''):''))}catch(e){console.error(e);st('Error: '+e.message)}
+ $('go').disabled=false;saveS()};
+
+function fallback(row,blob,name){
+ const u=URL.createObjectURL(blob);
+ if(!row.querySelector('.fb')){const a=document.createElement('a');a.className='btn g fb';a.href=u;a.download=name;a.target='_blank';a.textContent='Open / save PDF';a.style.marginLeft='6px';row.append(a)}
+ row.querySelector('.fb').href=u;
+ st('Direct download is blocked in this view. Tap "Open / save PDF". If that does nothing, open the Printable link directly in your browser (not inside a preview) and allow downloads when asked.');
+ claude.use('permissions').then(p=>{if(p&&!row.querySelector('.pm')){const b=document.createElement('button');b.className='g pm';b.textContent='Permissions';b.style.marginLeft='6px';b.onclick=()=>p.manage().catch(()=>{});row.append(b)}}).catch(()=>{})}
+async function show(outs){
+ const o=$(CUR==='v2'?'out2':'out');o.style.display='block';o.innerHTML='';
+ outs.forEach(f=>{const r=document.createElement('div');r.className='res';
+  const s=document.createElement('span');s.innerHTML=`<b></b><br><small></small>`;s.firstChild.textContent=f.label;s.lastChild.textContent=f.name+' · '+(f.data.length/1048576).toFixed(2)+' MB';
+  const b=document.createElement('button');b.textContent='Download';
+  b.onclick=async()=>{
+   const blob=new Blob([f.data],{type:'application/pdf'});
+   let d=null;try{d=await claude.use('downloads')}catch(e){}
+   if(d){try{await d.save({filename:f.name,data:blob});st('Saved ✓');return}catch(e){if(e&&e.code==='declined')return;st('Save failed ('+(e&&e.code||e)+'). Trying fallback…')}}
+   fallback(r,blob,f.name)};
+  r.append(s,b);o.append(r)})}
+
+/* ===== shuffle + multi-file question bank ===== */
+function shuffleSep(arr,kf){const a=arr.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}
+ for(let i=1;i<a.length;i++){if(kf(a[i])===kf(a[i-1])){const j=a.findIndex((x,k)=>k>i&&kf(x)!==kf(a[i-1])&&(i+1>=a.length||kf(x)!==kf(a[i+1])||true));if(j>0)[a[i],a[j]]=[a[j],a[i]]}}return a}
+const CUE=/\b(important|key|main|essential|critical|remember|note|must|always|never|significant|defined?|summary|conclusion|principle|rule|law|theorem|formula)\b/gi;
+function gScore(g,df){const all=g.sents.concat(g.lists.flatMap(l=>l.items)),txt=all.join(' ');let sc=Math.min(8,g.words/10);
+ if(g.sents.some(x=>RX.def.test(x)))sc+=3;if(g.sents.some(x=>RX.cmp.test(x)))sc+=2;if(g.sents.some(x=>RX.proc.test(x)))sc+=2;if(g.sents.some(x=>RX.cause.test(x)))sc+=2;if(g.lists.some(l=>l.items.length>=3))sc+=1;
+ sc+=2*Math.min(3,(txt.match(CUE)||[]).length);
+ const ws=[...new Set((txt.match(/\b[A-Za-z]{5,}\b/g)||[]).map(w=>w.toLowerCase()).filter(w=>!STOP.has(w)))];sc+=Math.min(5,ws.filter(w=>df[w]>=2).length*.5);
+ if(/^(agenda|outline|contents|objectives?|references|thank|questions|overview|learning outcomes)/i.test(g.title))sc-=6;return sc}
+async function runMulti(){
+ const N=Math.max(5,+$('n2').value||30),docs=[];
+ for(let i=0;i<files2.length;i++){st('Reading file '+(i+1)+'/'+files2.length+'…');const pg=await extractText(files2[i].bytes),a=analyse(pg);docs.push({name:files2[i].name.replace(/\.pdf$/i,''),a,gr:a.groups})}
+ if(!docs.some(d=>d.gr.length))throw new Error('No readable text found in these files.');
+ const df={};docs.forEach(d=>{const set=new Set();d.gr.forEach(g=>(g.sents.concat(g.lists.flatMap(l=>l.items)).join(' ').match(/\b[A-Za-z]{5,}\b/g)||[]).forEach(w=>set.add(w.toLowerCase())));set.forEach(w=>df[w]=(df[w]||0)+1)});
+ docs.forEach(d=>{d.qs=makeQs(d.gr);d.sc=d.gr.map(g=>gScore(g,df))});
+ const tot=docs.reduce((n,d)=>n+d.sc.reduce((a,b)=>a+Math.max(0,b),0),0)||1;let picks=[];
+ docs.forEach((d,fi)=>{const fs=d.sc.reduce((a,b)=>a+Math.max(0,b),0),quota=Math.max(1,Math.round(N*fs/tot));
+  d.sc.map((v,gi)=>({v,gi})).sort((x,y)=>y.v-x.v).slice(0,quota).forEach(({v,gi})=>{const l=d.qs.filter(q=>q.g===gi),q=l.find(x=>x.spec)||l[0];if(q)picks.push({v,f:fi,q:q.q,a:q.a,ref:d.name+' - '+q.ref})})});
+ picks=picks.sort((x,y)=>y.v-x.v).slice(0,N);
+ const qs=shuffleSep(picks,x=>x.f);
+ st('Building question bank…');
+ const data=await qbPdf(qs,{pages:docs.reduce((n,d)=>n+d.a.pages,0)},'Combined question bank ('+docs.length+' files)');
+ MSTAT=qs.length+' high-yield questions from '+docs.length+' file(s), shuffled.';
+ return[{name:'Question_Bank_combined.pdf',label:'Combined question bank ('+qs.length+' questions)',data}]}
+let MSTAT='',files2=[];
+function renderFl(){const el=$('fl');el.style.display=files2.length?'block':'none';el.innerHTML='';
+ files2.forEach((f,i)=>{const r=document.createElement('div');r.className='res';const t=document.createElement('span');t.textContent='📄 '+f.name;const b=document.createElement('button');b.className='g';b.textContent='✕';b.onclick=()=>{files2.splice(i,1);renderFl()};r.append(t,b);el.append(r)});$('go2').disabled=!files2.length}
+async function add2(list){for(const f of list){if(/pdf$/i.test(f.type||f.name))files2.push({name:f.name,bytes:new Uint8Array(await f.arrayBuffer())})}renderFl()}
+$('drop2').onclick=()=>$('f2').click();$('f2').onchange=e=>{add2([...e.target.files]);e.target.value=''};
+$('drop2').ondragover=e=>e.preventDefault();$('drop2').ondrop=e=>{e.preventDefault();add2([...e.dataTransfer.files])};
+$('go2').onclick=async()=>{$('go2').disabled=true;$('out2').style.display='none';try{const o=await runMulti();show(o);st('Done ✓ '+MSTAT)}catch(e){console.error(e);st('Error: '+e.message)}$('go2').disabled=!files2.length};
+/* ===== zoom navigation ===== */
+const RM=matchMedia('(prefers-reduced-motion:reduce)').matches;let busy=0;
+function go(to){if(busy||to===CUR)return;busy=1;const a=$(CUR),b=$(to),fwd=CUR==='home';
+ a.classList.remove('in');a.classList.add(fwd?'pre-big':'pre-small');
+ setTimeout(()=>{a.classList.remove('show','pre-big','pre-small');b.classList.add('show',fwd?'pre-small':'pre-big');[...b.children].forEach((c,i)=>c.style.setProperty('--i',i));
+  void b.offsetWidth;b.classList.remove('pre-small','pre-big');b.classList.add('in');CUR=to;scrollTo(0,0);setTimeout(()=>busy=0,300)},RM?0:360)}
+document.querySelectorAll('[data-go]').forEach(e=>{e.onclick=()=>go(e.dataset.go);e.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();go(e.dataset.go)}}});
+/* ===== theme switch ===== */
+function setTheme(t,save){document.documentElement.dataset.theme=t;document.querySelector('meta[name=color-scheme]').content=t==='dark'?'dark':'only light';document.querySelectorAll('#thm button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));if(save){try{localStorage.setItem('printable_theme',t)}catch(e){}}}
+let T0='light';try{T0=localStorage.getItem('printable_theme')==='dark'?'dark':'light'}catch(e){}
+setTheme(T0);document.querySelectorAll('#thm button').forEach(b=>b.onclick=()=>setTheme(b.dataset.t,1));
+// Presentation / Word switch -> sets Pages per sheet
+function syncSeg(){const v=$('pp').value;document.querySelectorAll('#seg button').forEach(b=>b.classList.toggle('on',(b.dataset.m==='p'&&v==='3')||(b.dataset.m==='w'&&v==='1')))}
+function setMode(m){$('pp').value=m==='p'?'3':'1';syncSeg();saveS()}
+document.querySelectorAll('#seg button').forEach(b=>b.onclick=()=>setMode(b.dataset.m));
+$('pp').addEventListener('change',syncSeg);syncSeg();
+async function detectMode(){try{const d=await PDFDocument.load(src,{ignoreEncryption:true}),z=d.getPage(0).getSize(),m=z.width>z.height?'p':'w';setMode(m);st('Detected: '+(m==='p'?'Presentation':'Word')+' layout. Change it above if wrong.')}catch(e){}}
+</script></body></html>
